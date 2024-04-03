@@ -24,6 +24,8 @@
  */
 package com.iluwatar.event.sourcing.event;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.iluwatar.event.sourcing.state.AccountAggregate;
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -31,7 +33,7 @@ import lombok.Getter;
 
 /**
  * This is the class that implements money transfer event. Holds the necessary info for a money
- * transfer event. Implements the process function that finds the event related domain objects and
+ * transfer event. Implements the process function that finds the event-related domain objects and
  * calls the related domain object's handle event functions
  *
  * <p>Created by Serdar Hamzaogullari on 06.08.2017.
@@ -52,8 +54,11 @@ public class MoneyTransferEvent extends DomainEvent {
    * @param accountNoFrom the account no from
    * @param accountNoTo   the account no to
    */
-  public MoneyTransferEvent(long sequenceId, long createdTime, BigDecimal money, int accountNoFrom,
-                            int accountNoTo) {
+  @JsonCreator
+  public MoneyTransferEvent(@JsonProperty("sequenceId") long sequenceId,
+      @JsonProperty("createdTime") long createdTime,
+      @JsonProperty("money") BigDecimal money, @JsonProperty("accountNoFrom") int accountNoFrom,
+      @JsonProperty("accountNoTo") int accountNoTo) {
     super(sequenceId, createdTime, "MoneyTransferEvent");
     this.money = money;
     this.accountNoFrom = accountNoFrom;

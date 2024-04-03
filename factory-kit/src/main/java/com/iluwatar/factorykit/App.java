@@ -25,7 +25,6 @@
 package com.iluwatar.factorykit;
 
 import java.util.ArrayList;
-
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -60,6 +59,6 @@ public class App {
     list.add(factory.create(WeaponType.SPEAR));
     list.add(factory.create(WeaponType.SWORD));
     list.add(factory.create(WeaponType.BOW));
-    list.stream().forEach(weapon -> LOGGER.info("{}", weapon.toString()));
+    list.forEach(weapon -> LOGGER.info("{}", weapon.toString()));
   }
 }

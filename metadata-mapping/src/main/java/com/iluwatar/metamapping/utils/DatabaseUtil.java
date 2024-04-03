@@ -34,22 +34,19 @@ import org.h2.jdbcx.JdbcDataSource;
 @Slf4j
 public class DatabaseUtil {
   private static final String DB_URL = "jdbc:h2:mem:metamapping";
-  private static final String CREATE_SCHEMA_SQL = "DROP TABLE IF EXISTS `user_account`;"
-      + "CREATE TABLE `user_account` (\n"
-      + "  `id` int(11) NOT NULL AUTO_INCREMENT,\n"
-      + "  `username` varchar(255) NOT NULL,\n"
-      + "  `password` varchar(255) NOT NULL,\n"
-      + "  PRIMARY KEY (`id`)\n"
-      + ");";
+  private static final String CREATE_SCHEMA_SQL = """
+          DROP TABLE IF EXISTS `user_account`;CREATE TABLE `user_account` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `username` varchar(255) NOT NULL,
+            `password` varchar(255) NOT NULL,
+            PRIMARY KEY (`id`)
+          );""";
 
   /**
    * Hide constructor.
    */
   private DatabaseUtil() {}
 
-  /**
-   * Create database.
-   */
   static {
     LOGGER.info("create h2 database");
     var source = new JdbcDataSource();

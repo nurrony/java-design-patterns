@@ -29,7 +29,6 @@ import static org.joda.money.CurrencyUnit.USD;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import javax.sql.DataSource;
-
 import org.h2.jdbcx.JdbcDataSource;
 import org.joda.money.Money;
 
@@ -50,7 +49,7 @@ import org.joda.money.Money;
  */
 public class App {
 
-  public static final String H2_DB_URL = "jdbc:h2:~/test";
+  public static final String H2_DB_URL = "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1";
 
   public static final String CREATE_SCHEMA_SQL =
       "CREATE TABLE CUSTOMERS (name varchar primary key, money decimal);"

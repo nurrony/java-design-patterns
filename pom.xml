@@ -36,19 +36,20 @@
   <description>Java Design Patterns</description>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <sonar-maven-plugin.version>3.8.0.2131</sonar-maven-plugin.version>
+    <sonar-maven-plugin.version>3.11.0.3922</sonar-maven-plugin.version>
     <spring-boot.version>2.7.5</spring-boot.version>
-    <jacoco.version>0.8.8</jacoco.version>
+    <jacoco.version>0.8.11</jacoco.version>
     <commons-dbcp.version>1.4</commons-dbcp.version>
-    <htmlunit.version>2.66.0</htmlunit.version>
-    <gson.version>2.10</gson.version>
+    <htmlunit.version>3.11.0</htmlunit.version>
+    <gson.version>2.10.1</gson.version>
     <guice.version>5.1.0</guice.version>
     <system-lambda.version>1.1.0</system-lambda.version>
-    <urm.version>2.0.0</urm.version>
-    <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-    <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
-    <license-maven-plugin.version>4.1</license-maven-plugin.version>
-    <urm-maven-plugin.version>1.4.8</urm-maven-plugin.version>
+    <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+    <maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
+    <license-maven-plugin.version>4.3</license-maven-plugin.version>
+    <urm-maven-plugin.version>2.1.1</urm-maven-plugin.version>
+    <slf4j.version>2.0.12</slf4j.version>
+    <logback.version>1.5.3</logback.version>
     <!-- SonarCloud -->
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.organization>iluwatar</sonar.organization>
@@ -60,7 +61,6 @@
     <module>abstract-factory</module>
     <module>collecting-parameter</module>
     <module>monitor</module>
-    <module>tls</module>
     <module>builder</module>
     <module>factory-method</module>
     <module>prototype</module>
@@ -138,6 +138,7 @@
     <module>abstract-document</module>
     <module>aggregator-microservices</module>
     <module>promise</module>
+    <module>page-controller</module>
     <module>page-object</module>
     <module>event-asynchronous</module>
     <module>event-queue</module>
@@ -199,11 +200,25 @@
     <module>composite-view</module>
     <module>metadata-mapping</module>
     <module>service-to-worker</module>
+    <module>client-session</module>
+    <module>model-view-intent</module>
     <module>embedded-value</module>
     <module>currying</module>
     <module>serialized-entity</module>
     <module>identity-map</module>
     <module>component</module>
+    <module>context-object</module>
+    <module>thread-local-storage</module>
+    <module>optimistic-offline-lock</module>
+    <module>crtp</module>
+    <module>log-aggregation</module>
+    <module>anti-corruption-layer</module>
+    <module>health-check</module>
+    <module>notification</module>
+    <module>single-table-inheritance</module>
+    <module>dynamic-proxy</module>
+    <module>gateway</module>
+    <module>slob</module>
   </modules>
   <repositories>
     <repository>
@@ -226,7 +241,7 @@
         <version>${commons-dbcp.version}</version>
       </dependency>
       <dependency>
-        <groupId>net.sourceforge.htmlunit</groupId>
+        <groupId>org.htmlunit</groupId>
         <artifactId>htmlunit</artifactId>
         <version>${htmlunit.version}</version>
       </dependency>
@@ -252,14 +267,17 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
+      <version>${logback.version}</version>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -331,7 +349,7 @@
             <configuration>
               <configLocation>google_checks.xml</configLocation>
               <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
-              <encoding>UTF-8</encoding>
+
               <failOnViolation>true</failOnViolation>
               <violationSeverity>warning</violationSeverity>
               <includeTestSourceDirectory>false</includeTestSourceDirectory>

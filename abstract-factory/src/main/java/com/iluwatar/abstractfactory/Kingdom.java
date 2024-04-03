@@ -27,6 +27,9 @@ package com.iluwatar.abstractfactory;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Helper class to manufacture {@link KingdomFactory} beans. 
+ */
 @Getter
 @Setter
 public class Kingdom {
@@ -51,14 +54,10 @@ public class Kingdom {
      * The factory method to create KingdomFactory concrete objects.
      */
     public static KingdomFactory makeFactory(KingdomType type) {
-      switch (type) {
-        case ELF:
-          return new ElfKingdomFactory();
-        case ORC:
-          return new OrcKingdomFactory();
-        default:
-          throw new IllegalArgumentException("KingdomType not supported.");
-      }
+      return switch (type) {
+        case ELF -> new ElfKingdomFactory();
+        case ORC -> new OrcKingdomFactory();
+      };
     }
   }
 }

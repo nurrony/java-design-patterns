@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * <p>
  * The intention of the Circuit Builder pattern is to handle remote failures robustly, which is to
- * mean that if a service is dependant on n number of other services, and m of them fail, we should
+ * mean that if a service is dependent on n number of other services, and m of them fail, we should
  * be able to recover from that failure by ensuring that the user can still use the services that
  * are actually functional, and resources are not tied up by uselessly by the services which are not
  * working. However, we should also be able to detect when any of the m failing services become
@@ -99,7 +99,7 @@ public class App {
       LOGGER.info("Waiting for delayed service to become responsive");
       Thread.sleep(5000);
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      LOGGER.error("An error occurred: ", e);
     }
     //Check the state of delayed circuit breaker, should be HALF_OPEN
     LOGGER.info(delayedServiceCircuitBreaker.getState());

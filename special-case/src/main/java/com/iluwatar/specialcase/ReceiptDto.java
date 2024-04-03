@@ -27,11 +27,14 @@ package com.iluwatar.specialcase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Receipt view representing the transaction recceipt.
+ */
 public class ReceiptDto implements ReceiptViewModel {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ReceiptDto.class);
 
-  private Double price;
+  private final Double price;
 
   public ReceiptDto(Double price) {
     this.price = price;
@@ -43,6 +46,6 @@ public class ReceiptDto implements ReceiptViewModel {
 
   @Override
   public void show() {
-    LOGGER.info("Receipt: " + price + " paid");
+    LOGGER.info(String.format("Receipt: %s paid", price));
   }
 }

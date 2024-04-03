@@ -27,6 +27,9 @@ package com.iluwatar.specialcase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Acquire lock on the DB for maintenance.
+ */
 public class MaintenanceLock {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(MaintenanceLock.class);
@@ -52,6 +55,6 @@ public class MaintenanceLock {
 
   public void setLock(boolean lock) {
     this.lock = lock;
-    LOGGER.info("Maintenance lock is set to: ", lock);
+    LOGGER.info("Maintenance lock is set to: {}", lock);
   }
 }

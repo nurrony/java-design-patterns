@@ -121,7 +121,7 @@ public class Commander {
     sendShippingRequest(order);
   }
 
-  private void sendShippingRequest(Order order) throws Exception {
+  private void sendShippingRequest(Order order) {
     var list = shippingService.exceptionsList;
     Retry.Operation op = (l) -> {
       if (!l.isEmpty()) {
@@ -233,7 +233,7 @@ public class Commander {
       try {
         r.perform(list, order);
       } catch (Exception e1) {
-        e1.printStackTrace();
+        LOG.error("An exception occurred", e1);
       }
     });
     t.start();
@@ -282,7 +282,7 @@ public class Commander {
       try {
         r.perform(list, qt);
       } catch (Exception e1) {
-        e1.printStackTrace();
+        LOG.error("An exception occurred", e1);
       }
     });
     t.start();
@@ -305,7 +305,7 @@ public class Commander {
       try {
         r.perform(list, null);
       } catch (Exception e1) {
-        e1.printStackTrace();
+        LOG.error("An exception occurred", e1);
       }
     });
     t2.start();
@@ -324,12 +324,12 @@ public class Commander {
       };
       Retry.HandleErrorIssue<QueueTask> handleError = (o, err) -> {
       };
-      var r = new Retry<QueueTask>(op, handleError, numOfRetries, retryDuration,
+      var r = new Retry<>(op, handleError, numOfRetries, retryDuration,
           e -> DatabaseUnavailableException.class.isAssignableFrom(e.getClass()));
       try {
         r.perform(list, null);
       } catch (Exception e1) {
-        e1.printStackTrace();
+        LOG.error("An exception occurred", e1);
       }
     });
     t3.start();
@@ -351,7 +351,7 @@ public class Commander {
       try {
         r.perform(list, order);
       } catch (Exception e1) {
-        e1.printStackTrace();
+        LOG.error("An exception occurred", e1);
       }
     });
     t.start();
@@ -409,7 +409,7 @@ public class Commander {
       try {
         r.perform(list, order);
       } catch (Exception e1) {
-        e1.printStackTrace();
+        LOG.error("An exception occurred", e1);
       }
     });
     t.start();
@@ -465,7 +465,7 @@ public class Commander {
       try {
         r.perform(list, order);
       } catch (Exception e1) {
-        e1.printStackTrace();
+        LOG.error("An exception occurred", e1);
       }
     });
     t.start();
@@ -477,8 +477,8 @@ public class Commander {
         && System.currentTimeMillis() - o.createdTime < messageTime) {
       var qt = new QueueTask(order, TaskType.MESSAGING, 1);
       updateQueue(qt);
-      LOG.warn("Order " + order.id + ": Error in sending Payment Error message, "
-              + "trying to queue task and add to employee handle..");
+      LOG.warn("Order {}: Error in sending Payment Error message, trying to queue task and add to employee handle..",
+              order.id);
       employeeHandleIssue(o);
     }
   }
@@ -537,7 +537,7 @@ public class Commander {
       try {
         r.perform(list, order);
       } catch (Exception e1) {
-        e1.printStackTrace();
+        LOG.error("An exception occurred", e1);
       }
     });
     t.start();
